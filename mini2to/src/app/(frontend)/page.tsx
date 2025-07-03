@@ -43,6 +43,7 @@ export default async function HomePage() {
         >
           Todos
         </h2>
+        <Link href="/todo-create">Create Todo</Link>
         {todos.docs.map((todo) => (
           <Link href={`/todos/${todo.id}`} key={todo.id} style={{ textDecoration: 'none' }}>
             <div style={{ border: '1px solid #ccc', padding: '10px' }}>
