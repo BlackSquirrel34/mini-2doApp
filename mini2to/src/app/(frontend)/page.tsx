@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
 import './styles.css'
+import Link from 'next/link'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -43,13 +44,15 @@ export default async function HomePage() {
           Todos
         </h2>
         {todos.docs.map((todo) => (
-          <div key={todo.id} style={{ border: '1px solid #ccc', padding: '10px' }}>
-            <h3>{todo.title}</h3>
-            <p>{todo.description}</p>
-            <p>{todo.completed ? 'Completed' : 'Not Completed'}</p>
-            <p>{todo.createdAt}</p>
-            <p>{todo.updatedAt}</p>
-          </div>
+          <Link href={`/todos/${todo.id}`} key={todo.id} style={{ textDecoration: 'none' }}>
+            <div style={{ border: '1px solid #ccc', padding: '10px' }}>
+              <h3>{todo.title}</h3>
+              <p>{todo.description}</p>
+              <p>{todo.completed ? 'Completed' : 'Not Completed'}</p>
+              <p>{todo.createdAt}</p>
+              <p>{todo.updatedAt}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
