@@ -5,8 +5,9 @@ import React from 'react'
 import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
-import './styles.css'
+
 import Link from 'next/link'
+import LogoutButton from '@/components/LogoutButton'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -43,7 +44,19 @@ export default async function HomePage() {
         >
           Todos
         </h2>
-        <Link href="/todo-create">Create Todo</Link>
+        <Link href="/todo-create">
+          <button
+            style={{
+              border: '1px solid #ccc',
+              borderRadius: 10,
+              padding: 10,
+              marginBottom: 16,
+            }}
+          >
+            Create Todo
+          </button>
+          <LogoutButton />
+        </Link>
         {todos.docs.map((todo) => (
           <Link href={`/todos/${todo.id}`} key={todo.id} style={{ textDecoration: 'none' }}>
             <div style={{ border: '1px solid #ccc', padding: '10px' }}>
