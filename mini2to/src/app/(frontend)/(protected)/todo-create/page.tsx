@@ -1,7 +1,15 @@
 import { createTodo } from '@/app/actions/createTodoAction'
+import { getUser } from '@/utils/getUser'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
-export default function TodoCreatePage() {
+export default async function TodoCreatePage() {
+  // get user if exists
+  const { user } = await getUser()
+  if (!user) {
+    redirect('/login')
+  }
+
   return (
     <div
       style={{

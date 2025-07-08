@@ -3,17 +3,18 @@ import { getPayload } from 'payload'
 import Image from 'next/image'
 import { Media } from '@/payload-types'
 import Link from 'next/link'
+import { getUser } from '@/utils/getUser'
+import { redirect } from 'next/navigation'
 
 export default async function TodoPage({ params }: { params: { id: string } }) {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
+  // get user if exists
+  const { user } = await getUser()
+  if (!user) {
+    redirect('/login')
+  }
 
-  const todoId = params.id
-
-  const todo_local = await payload.findByID({
-    collection: 'todos',
-    id: todoId,
-  })
+  const resolvedParams = await params
+  const todoId = resolvedParams.id
 
   // same thing with REST API
   const response = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/todos/${todoId}`)
