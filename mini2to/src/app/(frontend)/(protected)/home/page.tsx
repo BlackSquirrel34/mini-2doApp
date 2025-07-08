@@ -17,7 +17,7 @@ export default async function HomePage() {
     redirect('/login')
   }
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+  // const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
   const todos = await payload?.find({
     collection: 'todos',
